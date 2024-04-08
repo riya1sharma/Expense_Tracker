@@ -1,0 +1,17 @@
+
+.register-section{
+    height: 100vh;
+}
+.register-card{
+    width: 450px;
+}
+.card-header{
+    background-color: #333;
+    color: var(--secondary-light);
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-size: 1.3rem;
+}
+input::placeholder{
+    color: var(--secondary-light);
+}

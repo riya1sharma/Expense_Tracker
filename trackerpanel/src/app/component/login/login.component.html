@@ -1,0 +1,56 @@
+<div class="container-fluid login-section d-flex justify-content-center align-items-center">
+
+    <div class="card login-card p-2 shadow-lg">
+
+        <!--Card header-->
+
+        <div class="card-header p-3 d-flex justify-content-center align-items-center">
+            USER LOGIN
+        </div>
+
+        <!--card body-->
+
+        <div class="card-body">
+            <form [formGroup]="loginForm">
+
+                <div class="row">
+
+                    <div class="col-xl-12 mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" class="form-control" id="email" placeholder="Enter valid Email"
+                            formControlName="email">
+                        <div *ngIf="loginForm.controls['email'].hasError('required') && loginForm.controls['email'].touched"
+                            class="text-danger">
+                            Email is required!!
+                        </div>
+                    </div>
+                    <div class="col-xl-12 mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Enter valid password"
+                            formControlName="password">
+                        <div *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched"
+                            class="text-danger">
+                            Password is required!!
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </form>
+
+        </div>
+
+        <!--card footer-->
+
+        <div class="card-footer">
+            <a routerLink="/register" style="text-decoration: none;">
+                <span style="text-decoration: none;color: black;">click here to</span> register
+            </a>
+            <button class="btn btn-primary float-end" (click)="submit()" [disabled]="!this.loginForm.valid">
+                LOGIN
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<nav>
+    <ul>
+        <li>
+            <div class="user-profile-image">
+                <img src="../../assets/img/icon.png" alt="">
+            </div>
+        </li>
+        <li>
+            <a routerLink="/dashboard">
+                <div class="icon">
+                    <i class="bi bi-grid-fill"></i>
+                </div>
+                Dashboard
+            </a>
+        </li>
+        <li>
+            <a routerLink="/dashboard/income">
+                <div class="icon">
+                    <i class="bi bi-currency-rupee"></i>
+                </div>
+                Income
+            </a>
+        </li>
+        <li>
+            <a routerLink="/dashboard/expenses">
+                <div class="icon">
+                    <i class="bi bi-cash-coin"></i>
+                </div>
+                Expenses
+            </a>
+        </li>
+        <li>
+            <a routerLink="/dashboard/todo">
+                <div class="icon">
+                    <i class="bi bi-clipboard-check-fill"></i>
+                </div>
+                ToDo List
+            </a>
+        </li>
+        <li>
+            <a routerLink="/dashboard/saving">
+                <div class="icon">
+                    <i class="bi bi-wallet2"></i>
+                </div>
+                Total Savings
+            </a>
+        </li>
+        <li>
+            <a (click)="logout()">
+                <div class="icon">
+                    <i class="bi bi-box-arrow-left"></i>
+                </div>
+                Logout
+            </a>
+        </li>
+    </ul>
+</nav>

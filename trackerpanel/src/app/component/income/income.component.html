@@ -1,0 +1,139 @@
+<div class="container-fluid ">
+    <div class="heading"><h1 style="text-align: center;">INCOME DETAIL</h1></div>
+    <div class="income-section">
+        <button class="btn btn-primary float-end m-3" (click)="openModal('addIncomeModal',{})" >
+            Add +
+        </button>
+        <table class="table table-dark table-striped">
+            <thead style="text-align: center;">
+                <tr>
+                    <th>S.No</th>
+                    <th>Date</th>
+                    <th>Income Type</th>
+                    <th>Amount(in ₹)</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody style="text-align: center;">
+                <tr *ngFor="let income of incomeList; let i = index;">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ income.incomeDate }}</td>
+                  <td>{{ income.incomeType }}</td>
+                  <td>{{ income.incomeAmount }}</td>
+                  <td>
+                    <button class="btn btn-success" (click)="openModal('updateIncomeModal', i)"><i class="bi bi-pencil-square"></i></button>
+                    <button class="btn btn-danger" (click)="delete(i)"><i class="bi bi-trash3-fill"></i></button>
+                  </td>
+                </tr>
+                <tr *ngIf="incomeList.length === 0">
+                  <td colspan="5" style="text-align: center;">No income records found.</td>
+                </tr>
+              </tbody>
+        </table>
+    </div>
+        <!-- Display total income -->
+        <div style="font-size: 140%;font-weight: bolder;text-align: center;">Total Income: {{ totalIncome | currency:'INR' }}</div>
+
+</div>
+
+
+<!------ ADD MODAL ------->
+
+<!-- Modal -->
+<div class="modal fade" id="addIncomeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Add Income Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="incomeForm">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <label for="incomeDate" class="form-label">Date<sup>*</sup></label>
+                            <input type="date" class="form-control form-control-lg w-100 mb-3" format id="incomeDate"
+                                formControlName="incomeDate">
+                        </div>
+                        <div class="col-xl-6">
+                            <label for="incomeType" class="form-label">Income Type<sup>*</sup></label>
+                            <input type="text" class="form-control form-control-lg w-100 mb-3" id="incomeType"
+                                placeholder="Write your income type.." formControlName="incomeType">
+                        </div>
+                        <div class="col-xl-6">
+                            <label for="incomeAmount" class="form-label">Amount(in ₹)<sup>*</sup></label>
+                            <input type="text" class="form-control form-control-lg w-100 mb-3" id="incomeAmount"
+                                placeholder="write the amount(in ₹)..." formControlName="incomeAmount">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal('addIncomeModal')">Cancle</button>
+                <button type="button" class="btn btn-primary" (click)="submit()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!----DELETE MODAL-->
+ 
+  <!-- Modal delete -->
+  <!-- <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 text-danger" id="exampleModalLabel"><i class="bi bi-trash3-fill"></i> Delete </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-danger">
+          Are you sure you want to delete?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
+          <button type="button" class="btn btn-danger" (click)="delete(i)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+  <!---------- UPDATE INCOME MODAL ----------->
+  <div class="modal fade" id="updateIncomeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Update Income Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="incomeForm">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <label for="incomeDate" class="form-label">Date<sup>*</sup></label>
+                            <input type="date" class="form-control form-control-lg w-100 mb-3" format id="incomeDate"
+                                formControlName="incomeDate">
+                        </div>
+                        <div class="col-xl-6">
+                            <label for="incomeType" class="form-label">Income Type<sup>*</sup></label>
+                            <input type="text" class="form-control form-control-lg w-100 mb-3" id="incomeType"
+                                placeholder="Write your income type.." formControlName="incomeType">
+                        </div>
+                        <div class="col-xl-6">
+                            <label for="incomeAmount" class="form-label">Amount(in ₹)<sup>*</sup></label>
+                            <input type="text" class="form-control form-control-lg w-100 mb-3" id="incomeAmount"
+                                placeholder="write the amount(in ₹)..." formControlName="incomeAmount">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal('addIncomeModal')">Cancle</button>
+                <button type="button" class="btn btn-primary" (click)="update(index)">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

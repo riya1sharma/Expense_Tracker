@@ -1,0 +1,80 @@
+<div class="container-fluid register-section  d-flex justify-content-center align-items-center">
+
+    <div class="card register-card p-2 shadow-lg">
+
+        <div class="card-header d-flex justify-content-center align-items-center">
+            REGISTRATION FORM
+        </div>
+
+        <div class="card-body">
+            <form [formGroup]="registerForm">
+
+                <div class="row">
+
+                    <div class="col-xl-12 mb-3">
+                        <label for="firstName" class="form-label">Name</label>
+                        <input type="text" class="form-control" formControlName="firstName" id="firstName" placeholder="Enter your First Name">
+                        <div *ngIf="registerForm.controls['firstName'].hasError('required') && registerForm.controls['firstName'].touched"
+                        class="text-danger">
+                            Name is required!!
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-xl-12 mb-3">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" formControlName="lastName" id="lastName" placeholder="Enter your Last Name">
+                    </div> -->
+
+                    <div class="col-xl-12 mb-3">
+                        <label for="contact" class="form-label">Contact</label>
+                        <input type="text" class="form-control" formControlName="contact" id="pcontact" placeholder="Enter your contact detail">
+                        <div *ngIf="registerForm.controls['contact'].hasError('required') && registerForm.controls['contact'].touched"
+                        class="text-danger">
+                            Contact is required!!
+                        </div>
+                    </div>
+
+                    <div class="col-xl-12 mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" formControlName="email" id="email" placeholder="Enter valid Email">
+                        <div *ngIf="registerForm.controls['email'].hasError('required') && registerForm.controls['email'].touched"
+                            class="text-danger">
+                            Email is required!!
+                        </div>
+                    </div>
+
+                    <div class="col-xl-12 mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" formControlName="password" id="password" placeholder="Enter valid password">
+                        <div *ngIf="registerForm.controls['password'].hasError('required') && registerForm.controls['password'].touched"
+                            class="text-danger">
+                            Password is required!!
+                        </div>
+                    </div>
+
+                    <div class="col-xl-12 mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" formControlName="confirmPassword" id="confirmPassword" placeholder="Confirm password">
+                        <div *ngIf="registerForm.controls['confirmPassword'].hasError('required') && registerForm.controls['confirmPassword'].touched"
+                            class="text-danger">
+                            Confirm password is required!!
+                        </div>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+
+        <div class="card-footer">
+            <a routerLink="" style="text-decoration: none;">
+                <span style="text-decoration: none;color: black;">click here to</span> Login
+            </a>
+            <button class="btn btn-primary float-end" (click)="register()" [disabled]="!this.registerForm.valid">
+                Register
+            </button>
+        </div>
+
+    </div>
+
+</div>

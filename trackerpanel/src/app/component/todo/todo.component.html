@@ -1,0 +1,139 @@
+<div class="container-fluid">
+    <div class="heading"><h1 style="text-align: center;">TODO LIST</h1></div>
+        <div class="todo-section">
+            <button class="btn btn-primary float-end m-3" (click)="openModal('addTodoModal',{})" >
+                Add +
+            </button>
+            <table class="table table-dark table-striped">
+                <thead style="text-align: center;">
+                  <tr>
+                    <th>S.No</th>
+                    <th>Date</th>
+                    <th>Todo Detail</th>
+                    <th>Amount(in ₹)</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody style="text-align: center;">
+                  <tr *ngFor="let todo of todoList; let i = index;">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ todo.todoDate }}</td>
+                    <td>{{ todo.todoType }}</td>
+                    <td>{{ todo.todoAmount }}</td>
+                    <td>
+                      <button class="btn btn-success" (click)="openModal('updateTodoModal', i)">Update</button>
+                      <button class="btn btn-danger" (click)="delete(i)">Delete</button>
+                    </td>
+                  </tr>
+                  <tr *ngIf="todoList.length === 0">
+                    <td colspan="5" style="text-align: center;">No todo records found.</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+            <!-- Display total todo -->
+            <div style="font-size: 140%;font-weight: bolder;text-align: center;">Total Amount: {{ totalTodo | currency:'INR' }}</div>
+    
+    </div>
+    
+    
+    <!------ ADD MODAL ------->
+    
+    <!-- Modal -->
+    <div class="modal fade" id="addTodoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Todo Details</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="todoForm">
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <label for="todoDate" class="form-label">Date<sup>*</sup></label>
+                                <input type="date" class="form-control form-control-lg w-100 mb-3" format id="todoDate"
+                                    formControlName="todoDate">
+                            </div>
+                            <div class="col-xl-6">
+                                <label for="todoType" class="form-label">Todo Details<sup>*</sup></label>
+                                <input type="text" class="form-control form-control-lg w-100 mb-3" id="todoType"
+                                    placeholder="Write your todo type.." formControlName="todoType">
+                            </div>
+                            <div class="col-xl-6">
+                                <label for="todoAmount" class="form-label">Amount(in ₹)<sup>*</sup></label>
+                                <input type="text" class="form-control form-control-lg w-100 mb-3" id="todoAmount"
+                                    placeholder="write the amount(in ₹)..." formControlName="todoAmount">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal('addTodoModal')">Cancle</button>
+                    <button type="button" class="btn btn-primary" (click)="submit()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <!----DELETE MODAL-->
+     
+      <!-- Modal delete -->
+      <!-- <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 text-danger" id="exampleModalLabel"><i class="bi bi-trash3-fill"></i> Delete </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-danger">
+              Are you sure you want to delete?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
+              <button type="button" class="btn btn-danger" (click)="delete()">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    
+    
+      <!---------- UPDATE Todo MODAL ----------->
+      <div class="modal fade" id="updateTodoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update Todo Details</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="todoForm">
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <label for="todoDate" class="form-label">Date<sup>*</sup></label>
+                                <input type="date" class="form-control form-control-lg w-100 mb-3" format id="todoDate"
+                                    formControlName="todoDate">
+                            </div>
+                            <div class="col-xl-6">
+                                <label for="todoType" class="form-label">Todo Details<sup>*</sup></label>
+                                <input type="text" class="form-control form-control-lg w-100 mb-3" id="todoType"
+                                    placeholder="Write your todo type.." formControlName="todoType">
+                            </div>
+                            <div class="col-xl-6">
+                                <label for="todoAmount" class="form-label">Amount(in ₹)<sup>*</sup></label>
+                                <input type="text" class="form-control form-control-lg w-100 mb-3" id="todoAmount"
+                                    placeholder="write the amount(in ₹)..." formControlName="todoAmount">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal('addTodoModal')">Cancle</button>
+                    <button type="button" class="btn btn-primary" (click)="update(index)">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
